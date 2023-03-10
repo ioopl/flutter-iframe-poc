@@ -1,6 +1,6 @@
 {
-    "name": "flutter_frame",
-    "short_name": "flutter_frame",
+    "name": "flutter_iframe_poc",
+    "short_name": "flutter_iframe_poc",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
