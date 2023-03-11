@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iframe_poc/controllers/app_controller.dart';
+import 'package:flutter_iframe_poc/pages/widgets/label_widget.dart';
+import 'package:flutter_iframe_poc/pages/widgets/label_widget_iframe.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,100 +13,43 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController inputController = TextEditingController();
+  final appController = Get.put(AppController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.08,
-              width: MediaQuery.of(context).size.width * 0.3,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(color: Colors.teal, borderRadius: BorderRadius.circular(10)),
-              child: Text(
-                'Web Button',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.35,
-              width: MediaQuery.of(context).size.width * 0.45,
-              alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.teal)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  textField(),
-                  Text(
-                    'Label:',
-                    style: TextStyle(color: Colors.black87, fontSize: 18),
+      body: Obx(
+        () => Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  onPressButton();
+                },
+                child: Container(
+                  height: Get.height * 0.08,
+                  width: Get.width * 0.3,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(color: Colors.teal, borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    '${appController.buttonText.value}',
+                    style: TextStyle(color: Colors.white),
                   ),
-                  Center(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.06,
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.teal,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        'Send',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+              LabelWidget(),
+              //LabelWidgetiFrame(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget textField() {
-    return TextField(
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Color(0xFFF2F2F2).withOpacity(0.75),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-          borderSide: BorderSide(width: 1, color: Colors.teal),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-          borderSide: BorderSide(width: 1, color: Colors.grey),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-          borderSide: BorderSide(width: 1, color: Colors.grey),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-          borderSide: BorderSide(width: 1),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-          borderSide: BorderSide(width: 1, color: Colors.black),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-          borderSide: BorderSide(width: 1, color: Colors.yellowAccent),
-        ),
-        hintText: "HintText",
-        hintStyle: TextStyle(fontSize: 16, color: Color(0xFFB3B1B1)),
-      ),
-      controller: inputController,
-      onChanged: (val) {},
-      obscureText: false,
-    );
+  void onPressButton() {
+    appController.label.value = '123';
+    appController.inputString.value = '';
   }
 }
