@@ -39,7 +39,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              LabelWidget(),
+              LabelWidget(
+                label: appController.label.value,
+                msg: appController.msg.value,
+                onTap: (val){
+                  appController.buttonText.value = val;
+                  appController.msg.value = val;
+                },
+              ),
               //LabelWidgetiFrame(),
             ],
           ),
@@ -50,6 +57,5 @@ class _HomePageState extends State<HomePage> {
 
   void onPressButton() {
     appController.label.value = '123';
-    appController.inputString.value = '';
   }
 }
