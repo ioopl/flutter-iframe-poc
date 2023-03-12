@@ -24,30 +24,41 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              InkWell(
-                onTap: () {
-                  onPressButton();
-                },
-                child: Container(
-                  height: Get.height * 0.08,
-                  width: Get.width * 0.3,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(color: Colors.teal, borderRadius: BorderRadius.circular(10)),
-                  child: Text(
-                    '${appController.buttonText.value}',
-                    style: TextStyle(color: Colors.white),
+              Expanded(
+                flex: 2,
+                child: GestureDetector(
+                  onTap: () {
+                    onPressButton();
+                  },
+                  child: Center(
+                    child: Container(
+                      height: Get.height * 0.08,
+                      width: Get.width * 0.3,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.teal,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        '${appController.buttonText.value}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              LabelWidget(
+              /*LabelWidget(
                 label: appController.label.value,
                 msg: appController.msg.value,
                 onTap: (val){
                   appController.buttonText.value = val;
                   appController.msg.value = val;
                 },
+              ),*/
+              Expanded(
+                flex: 4,
+                child: LabelWidgetiFrame(),
               ),
-              //LabelWidgetiFrame(),
             ],
           ),
         ),
